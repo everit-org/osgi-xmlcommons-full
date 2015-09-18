@@ -3,10 +3,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  
+
   <groupId>org.everit.osgi.bundles</groupId>
   <artifactId>org.everit.osgi.bundles.org.apache.xmlcommons.full</artifactId>
-  <version>1.4.1-20150916</version>
+  <version>1.4.1-20150918</version>
   <packaging>bundle</packaging>
 
   <name>Everit - XML Commons Full OSGi bundle</name>
@@ -82,13 +82,16 @@
             <Import-Package>
               *;resolution:=optional
             </Import-Package>
+            <Embed-Transitive>true</Embed-Transitive>
             <Embed-Dependency>
               groupId=xerces;artifactId=xercesImpl,
               groupId=xml-resolver;artifactId=xml-resolver,
               groupId=xalan;artifactId=serializer,
-              groupId=xml-apis;artifactId=xml-apis,
+              groupId=xml-apis;artifactId=xml-apis;inline=false,
               groupId=xml-apis;artifactId=xml-apis-ext,
-              groupId=xalan;artifactId=xalan
+              groupId=xalan;artifactId=xalan,
+              groupId=org.codehaus.woodstox;artifactId=woodstox-core-asl,
+              groupId=org.codehaus.woodstox;artifactId=stax2-api
             </Embed-Dependency>
           </instructions>
         </configuration>
@@ -138,6 +141,18 @@
       <artifactId>xalan</artifactId>
       <version>2.7.1</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.woodstox</groupId>
+      <artifactId>woodstox-core-asl</artifactId>
+      <version>4.4.1</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>stax-api</artifactId>
+          <groupId>javax.xml.stream</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
 </project>
